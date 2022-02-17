@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>FANTACICLISMO</title>
+</head>
+<body style="margin:0px;">
+    <div class="container">
+        <div class="table-responsive">
+            <h1 style="font-size:24px;">Lista Corridori FantaCiclismo</h1>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped" id="riders_table" style="width:100%; border-collapse:collapse; font:14px Arial,sans-serif;">
+        <tr>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Squadra</th>
+            <th>Ruolo</th>
+            <th>Valore</th>
+        </tr>
+    </table>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+        $.getJSON("list.json", function(data){
+            var riders_data = '';
+            $.each(function(key, value){
+                riders_data += '<tr>';
+                riders_data += '<td>' + value.COGNOME + '</td>';
+                riders_data += '<td>' + value.NOME + '</td>';
+                riders_data += '<td>' + value.SQUADRA + '</td>';
+                riders_data += '<td>' + value.RUOLO + '</td>';
+                riders_data += '<td>' + value.VALORE + '</td>';
+                riders_data += '<tr>';
+            });
+            $('#riders_table').append(riders_data);
+        });
+    });
+</script>
