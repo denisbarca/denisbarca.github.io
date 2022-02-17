@@ -26,19 +26,22 @@
 </html>
 
 <script>
-    $(document).ready(function(){
-        $.getJSON("list.json", function(data){
-            var riders_data = '';
-            $.each(function(key, value){
-                riders_data += '<tr>';
-                riders_data += '<td>' + value.COGNOME + '</td>';
-                riders_data += '<td>' + value.NOME + '</td>';
-                riders_data += '<td>' + value.SQUADRA + '</td>';
-                riders_data += '<td>' + value.RUOLO + '</td>';
-                riders_data += '<td>' + value.VALORE + '</td>';
-                riders_data += '<tr>';
-            });
-            $('#riders_table').append(riders_data);
+    fetch('people.json')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
         });
-    });
+    function appendData(data) {
+        var mainContainer = document.getElementById("myData");
+        for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML = 'Name: ' + data[i].firstName + ' ' + data[i].lastName;
+            mainContainer.appendChild(div);
+        }
+    }
 </script>
