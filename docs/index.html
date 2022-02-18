@@ -13,7 +13,7 @@
             <h1 style="font-size:24px;">Lista Corridori FantaCiclismo</h1>
         </div>
     </div>
-    <table class="table table-bordered table-striped" id="riders_table" style="width:100%; border-collapse:collapse; font:14px Arial,sans-serif;">
+    <!-- <table class="table table-bordered table-striped" id="riders_table" style="width:100%; border-collapse:collapse; font:14px Arial,sans-serif;">
         <tr>
             <th>Cognome</th>
             <th>Nome</th>
@@ -21,7 +21,27 @@
             <th>Ruolo</th>
             <th>Valore</th>
         </tr>
-    </table>
+
+        
+    </table> -->
+
+    <script>
+        $(document).ready(function(){
+            $.getJSON("list.json", function(data){
+                var riders_data = '';
+                $.each(function(key, value){
+                    riders_data += '<tr>';
+                    riders_data += '<td>' + value.COGNOME + '</td>';
+                    riders_data += '<td>' + value.NOME + '</td>';
+                    riders_data += '<td>' + value.SQUADRA + '</td>';
+                    riders_data += '<td>' + value.RUOLO + '</td>';
+                    riders_data += '<td>' + value.VALORE + '</td>';
+                    riders_data += '<tr>';
+                });
+                $('#riders_table').append(riders_data);
+            });
+        });
+    </script>
 </body>
 </html>
 
